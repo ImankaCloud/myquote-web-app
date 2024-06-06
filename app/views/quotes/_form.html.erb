@@ -1,0 +1,51 @@
+<% if @quote.errors.any? %>
+  <div class="alert alert-danger">
+    <ul>
+      <% @quote.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with(model: @quote, local: true) do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+
+  <!-- Quote Content form field with Bootstrap styling -->
+  <div class="form-group" style="padding-bottom: 10px;">
+    <%= f.text_area :text, placeholder: 'Quote Content', class: 'form-control' %>
+  </div>
+
+  <!-- Publication Year form field with number input and Bootstrap styling -->
+  <div class="form-group" style="padding-bottom: 10px;">
+    <%= f.label :publication_year, "Publication Year", class: "form-label" %>
+    <%= f.number_field :publication_year, placeholder: 'Publication Year', class: 'form-control', value: @quote.publication_year.to_s %>
+  </div>
+
+  <!-- Comment form field with Bootstrap styling -->
+  <div class="form-group" style="padding-bottom: 10px;">
+    <%= f.text_area :comment, placeholder: 'Comment', class: 'form-control' %>
+  </div>
+
+  <!-- Quote IsPublic setting form check box with Bootstrap styling -->
+  <div class="form-check" style="padding-bottom: 10px;">
+    <%= f.label :is_public, "Public", class: "form-check-label" %>
+    <%= f.check_box :is_public, class: "form-check-input" %>
+  </div>
+
+  <!-- Philosopher form field with a default value and Bootstrap styling -->
+  <div class="form-group" style="padding-bottom: 10px;">
+    <%= f.label :philosopher_id, "Philosopher", class: "form-label" %>
+    <%= f.select :philosopher_id, Philosopher.all.collect { |phil| ["#{phil.first_name} #{phil.last_name}", phil.id] }, { include_blank: true, selected: Philosopher.find_by(first_name: 'Heraclitus')&.id }, class: "form-control" %>
+  </div>
+
+  <!-- Single Category field -->
+  <div class="form-group" style="padding-bottom: 10px;">
+    <%= f.label :category_ids, "Category", class: "form-label" %>
+    <%= f.collection_select :category_ids, Category.all, :id, :category_name, { include_blank: true }, { class: "form-control" } %>
+  </div>
+
+  <div class="mt-3">
+    <%= f.submit 'Save Quote', class: 'btn btn-primary btn-lg' %>
+  </div>
+<% end %>

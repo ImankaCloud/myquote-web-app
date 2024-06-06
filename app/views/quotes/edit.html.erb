@@ -1,0 +1,10 @@
+<h1>Edit Quote</h1>
+
+<%= render 'form' %>
+
+<div class="d-flex gap-2 mt-2">
+  <%= link_to 'Back', quotes_path, class: 'btn btn-primary' %>
+  <% if logged_in? && (current_user == @quote.user || current_user.is_admin?) %>
+    <%= button_to "Destroy this quote", @quote, method: :delete, class: 'btn btn-danger' %>
+  <% end %>
+</div>

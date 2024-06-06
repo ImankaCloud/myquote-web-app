@@ -1,0 +1,7 @@
+<p style="color: green"><%= notice %></p>
+<p>Hello, <%= session[:first_name] %>!</p>
+<h3>Welcome to MyQuote</h3>
+
+<p>This is your personal landing page where you can manage your quotes, view your profile, and explore new philosophical quotes.</p>
+
+<p><%= link_to 'Edit Your Details', edit_user_path(session[:user_id]), class: 'btn btn-primary' %></p>

@@ -1,0 +1,19 @@
+<div class="container mt-4">
+  <h1>Welcome to MyQuote</h1>
+  <p>Explore and share your favorite philosophical quotes!</p>
+  <h3>Recently Added Quotes</h3>
+  <hr />
+  <% @quotes.each do |quote| %>
+    <div class="card bg-body-tertiary mb-4">
+      <div class="card-body">
+        <h2 class="display-6"><%= quote.text %></h2>
+        <h4 class="card-title mt-3"><%= quote.philosopher.first_name %> <%= quote.philosopher.last_name %></h4>
+        <p class="card-text">
+          <small><strong>Submitted by:</strong> <%= quote.user.first_name %> <%= quote.user.last_name %></small><br />
+          <small><strong>Publication Year:</strong> <%= quote.publication_year %></small><br />
+          [<a href="<%= quote_path(quote) %>">Read full quote</a>]
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>

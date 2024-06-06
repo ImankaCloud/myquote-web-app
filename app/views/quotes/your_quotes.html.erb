@@ -1,0 +1,24 @@
+<div class="container mt-4">
+  <h1>Your Quotes</h1>
+
+  <% if @quotes.any? %>
+    <% @quotes.each do |quote| %>
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="card-title"><%= quote.philosopher.first_name %> <%= quote.philosopher.last_name %></h2>
+          <p class="card-text"><%= quote.text %></p>
+          <p class="card-text"><strong>Publication Year:</strong> <%= quote.publication_year %></p>
+          <p class="card-text"><strong>Comment:</strong> <%= quote.comment %></p>
+          <p class="card-text"><strong>Category:</strong> <%= quote.categories.map(&:category_name).join(", ") %></p>
+          <p class="card-text"><strong>Public:</strong> <%= quote.is_public ? 'Yes' : 'No' %></p>
+          <%= link_to 'Show', quote, class: 'btn btn-primary' %>
+          <%= link_to 'Edit', edit_quote_path(quote), class: 'btn btn-secondary ml-2' %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="alert alert-warning" role="alert">
+      No quotes found.
+    </div>
+  <% end %>
+</div>

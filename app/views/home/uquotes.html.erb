@@ -1,0 +1,12 @@
+<h3>Your Quotes</h3>
+<hr />
+<% @quotes.each do |quote| %>
+  <div class="card bg-body-tertiary" style="margin-bottom:10px">
+    <div class="card-body">
+      <h4 class="card-title"><%= quote.philosopher.first_name %> <%= quote.philosopher.last_name %></h4>
+      <p class="card-text"><%= quote.text %><br />
+      <small><strong>Publication Year:</strong> <%= quote.publication_year %></small><br />
+      [<a href="<%= quote_path(quote) %>">Read full quote</a>]</p>
+    </div>
+  </div>
+<% end %>
